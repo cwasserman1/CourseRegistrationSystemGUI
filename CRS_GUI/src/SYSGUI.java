@@ -7,14 +7,13 @@ import java.util.*;
 public class SYSGUI {
 	JLabel titleText;
 	JFrame frame;
-	JButton adminB, studentB,Alogin;
-	JTextField adminUser, adminPassword;
+	JButton adminB, studentB;
 	JPanel panel;
 	Font font1;
 	
 	public SYSGUI() {
 		initializeLayout();
-		loginUI();
+		homeScreen();
 		
 	}
 	public void initializeLayout()
@@ -37,17 +36,6 @@ public class SYSGUI {
 		frame.setLayout(null);
 		frame.setVisible(true);
 		
-	}
-	public void loginUI() {
-		adminB = new JButton("Student Login");
-		studentB = new JButton("Admin Login");
-		adminB.setFont(font1);
-		studentB.setFont(font1);
-		panel.add(adminB);
-		panel.add(studentB);
-		adminB.setBounds(650, 500, 200, 100);
-		studentB.setBounds(650, 300, 200, 100);;
-		
 		
 	}
 	public void studentLoginUI() {
@@ -57,25 +45,59 @@ public class SYSGUI {
 		
 	}
 	public void adminUI() {
-		Alogin.setVisible(false);
+		
+	
 	}
 	public void adminLoginUI() {
-		Alogin = new JButton("Login");
-		Alogin.addActionListener(new ActionListener() {
-			 public void actionPerformed(ActionEvent e) {
+		
+		
+				 JTextField adminUserName = new JTextField("Username"); //Text fields for admin username and password entry
+				 JTextField adminPassword = new JTextField("Password");
+				 JButton loginButton = new JButton("Login");
+				 
+				 panel.add(adminUserName); panel.add(adminPassword); panel.add(loginButton);
+				 adminUserName.setBounds(650, 200, 200, 50);
+				 adminPassword.setBounds(650, 300, 200, 50);
+				 loginButton.setBounds(650, 400
+						 , 80, 50);
+				 
+				 loginButton.setVisible(true);
+				 adminUserName.setVisible(true);
+				 adminPassword.setVisible(true);
 				 String ADMIN_USER = "Admin";
 				 String ADMIN_PASS = "Admin001";
-				 if(adminUser.getText().strip().equals(ADMIN_USER)&&adminPassword.getText().strip().equals(ADMIN_PASS)) {
-				 adminUI();
-			 }}
-		 });
+				 loginButton.addActionListener(new ActionListener() {
+					 public void actionPerformed(ActionEvent e) {
+						 if(adminUserName.getText().strip().equals(ADMIN_USER)&&adminPassword.getText().strip().equals(ADMIN_PASS)) {
+							 adminUserName.setVisible(false);
+							 adminPassword.setVisible(false);
+							 loginButton.setVisible(false);
+							 adminUI();
+					 }
+						 
+					 }
+				 });
+				 
+				 }
+		 
 		
-	}
-	public void buttons() {
-		 adminB.addActionListener(new ActionListener() {
+	
+	public void homeScreen() {
+		adminB = new JButton("Admin Login");
+		studentB = new JButton("Student Login");
+		adminB.setFont(font1);
+		studentB.setFont(font1);
+		
+		panel.add(adminB); panel.add(studentB);
+		adminB.setBounds(650, 500, 200, 100);
+		studentB.setBounds(650, 300, 200, 100);
+		
+		 adminB.addActionListener(new ActionListener() {//User chooses admin on home screen
 			 public void actionPerformed(ActionEvent e) {
+				 adminB.setVisible(false);
 				 studentB.setVisible(false);
-				 adminLoginUI();				 
+				 adminLoginUI();
+				 
 			 }
 		 });
 		 
