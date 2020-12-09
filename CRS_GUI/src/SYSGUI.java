@@ -45,7 +45,27 @@ public class SYSGUI {
 		
 	}
 	public void adminUI() {
+		BregisterStudent.setBounds(600, 250, 300,50);
+		BviewAllFull.setBounds(600, 300, 300,50);
+		BwriteFull.setBounds(600, 350, 300,50);
+		BsortCourses.setBounds(600, 400, 300,50);
+		BdisplayCourseInfo.setBounds(600, 450, 300,50);
+		Breturn.setBounds(600, 500, 500,50);
 		
+		
+		
+		panel.add(BcreateCourse); panel.add(BdeleteCourse); panel.add(BeditCourse); panel.add(BregisterStudent);panel.add(BviewAllFull);panel.add(BwriteFull);
+		panel.add(BsortCourses); panel.add(BdisplayCourseInfo); panel.add(Breturn);
+		
+		BcreateCourse.setVisible(true);
+		BdeleteCourse.setVisible(true);
+		BeditCourse.setVisible(true);
+		BregisterStudent.setVisible(true);
+		BviewAllFull.setVisible(true);
+		BwriteFull.setVisible(true);
+		BsortCourses.setVisible(true);
+		BdisplayCourseInfo.setVisible(true);
+		Breturn.setVisible(true);
 	
 	}
 	public void adminLoginUI() {
@@ -58,8 +78,7 @@ public class SYSGUI {
 				 panel.add(adminUserName); panel.add(adminPassword); panel.add(loginButton);
 				 adminUserName.setBounds(650, 200, 200, 50);
 				 adminPassword.setBounds(650, 300, 200, 50);
-				 loginButton.setBounds(650, 400
-						 , 80, 50);
+				 loginButton.setBounds(650, 400, 80, 50);
 				 
 				 loginButton.setVisible(true);
 				 adminUserName.setVisible(true);
@@ -73,14 +92,10 @@ public class SYSGUI {
 							 adminPassword.setVisible(false);
 							 loginButton.setVisible(false);
 							 adminUI();
-					 }
-						 
-					 }
+					 }}
 				 });
 				 
 				 }
-		 
-		
 	
 	public void homeScreen() {
 		adminB = new JButton("Admin Login");
@@ -93,11 +108,11 @@ public class SYSGUI {
 		studentB.setBounds(650, 300, 200, 100);
 		
 		 adminB.addActionListener(new ActionListener() {//User chooses admin on home screen
+			 
 			 public void actionPerformed(ActionEvent e) {
 				 adminB.setVisible(false);
 				 studentB.setVisible(false);
-				 adminLoginUI();
-				 
+				 adminLoginUI();	 
 			 }
 		 });
 		 
