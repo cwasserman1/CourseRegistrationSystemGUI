@@ -23,6 +23,7 @@ public class SYSGUI {
 	}
 	public void initializeLayout()
 	{
+		CourseData.main();
 		mainAdmin = new Admin(ADMIN_USER,ADMIN_PASS,"admin","admin");
 		font1 = new Font("SansSerif", Font.BOLD, 20);
 		frame = new JFrame();
@@ -98,6 +99,13 @@ public class SYSGUI {
 	public void studentUI() {
 		
 	}
+	public void setDefaultLayout(int start,ArrayList<JComponent> compList) {
+		int initialY = start;
+		for(JComponent i: compList) {
+			 i.setBounds(600,initialY,300,50);
+			 initialY += 50;
+		 }
+	}
 	public void adminUI() {
 	
 		
@@ -136,8 +144,9 @@ public class SYSGUI {
 				 
 				  mainAdmin.createCourse(cName.getText(), cId.getText(), cInstr.getText(), sSecNum.getText(), cLoc.getText(), Integer.parseInt(cCap.getText()));
 				  for(Course k: CourseData.allCourses) {
-					  System.out.println(k.getCourseName());
+					  System.out.print(k.getCourseName()+" ");
 				  }
+				  System.out.println();
 			 }
 		 });
 				 
@@ -148,17 +157,51 @@ public class SYSGUI {
 		 });
 		BdeleteCourse.addActionListener(new ActionListener() {
 			 public void actionPerformed(ActionEvent e) {
-				 
 				 setComponentState(Adminbuttons, false);
+				 ArrayList<JComponent> thisScreen = new ArrayList<JComponent>();
+				 JTextField delID, delSec;
+				 JButton confirmDel, back;
+				 back = new JButton("Back");
+				 thisScreen.add(back);
+				 delID = new JTextField("Course ID");
+				 delSec = new JTextField("Course Section Number");
+				 confirmDel = new JButton("Confirm Delete");
+				 thisScreen.add(back);
+				 thisScreen.add(delID); thisScreen.add(delSec); thisScreen.add(confirmDel);
+				 
+				 setDefaultLayout(100,thisScreen);
+				 
+				 addComptoPanel(thisScreen);
+				 
+				 confirmDel.addActionListener(new ActionListener() {
+					 public void actionPerformed(ActionEvent e) {
+						mainAdmin.deleteCourse(delID.getText(), delSec.getText());
+
+						 
+						 
+						
+					 }
+				 });
+				 back.addActionListener(new ActionListener() {
+					 public void actionPerformed(ActionEvent e) {
+						 
+						 setComponentState(thisScreen, false);
+						 confirmDel.setVisible(false);
+						 back.setVisible(false);
+						 adminUI();						 
+					 }
+				 });
+				 
+				 
 				 
 			 }
 		 });
-		BeditCourse.addActionListener(new ActionListener() {
+		BeditCourse.addActionListener(new ActionListener() { //Button for admin to edit course
 			 public void actionPerformed(ActionEvent e) {
 				 setComponentState(Adminbuttons, false);
 			 }
 		 });
-		BregisterStudent.addActionListener(new ActionListener() {
+		BregisterStudent.addActionListener(new ActionListener() {// Button for admin to register student
 			 public void actionPerformed(ActionEvent e) {
 				 setComponentState(Adminbuttons, false);
 			 }

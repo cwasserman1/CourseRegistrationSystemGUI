@@ -30,11 +30,11 @@ public class CourseData {
 		allCourses.add(a);
 	}
 	public static void removeCourse(String courseId, String sectionNumber) {
-		for(Course i: CourseData.getAllCourses()) {
-			if(i.getCourseId().equals(courseId)&&i.getSectionNumber().equals(sectionNumber)) {
-				allCourses.remove(CourseData.getAllCourses().indexOf(i));
-			}
-		}
+//		for(Course i: CourseData.getAllCourses()) {
+//			if(i.getCourseId().equals(courseId)&&i.getSectionNumber().equals(sectionNumber)) {
+//				allCourses.remove(CourseData.getAllCourses().indexOf(i));
+//			}
+//		}
 		
 	}
 	public static void setAllCourses(ArrayList<Course> allCourses) {

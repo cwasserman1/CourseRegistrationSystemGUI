@@ -13,14 +13,9 @@ public class Admin extends User implements IAdmin{
 
 	@Override
 	public void deleteCourse(String courseId, String sectionNumber) {//Deletes desired course
-		Scanner response = new Scanner(System.in);
-		String targetID,targetSectionNumber;
-		System.out.println("Delete a Course: \n Course ID");
-		targetID = response.nextLine();
-		System.out.println("Course Section Number");
-		targetSectionNumber = response.nextLine(); //Write code in case that course is not in allCourses
 		
-		CourseData.removeCourse(targetID, targetSectionNumber);
+		
+		CourseData.removeCourse(courseId, sectionNumber);
 		
 	}
 
