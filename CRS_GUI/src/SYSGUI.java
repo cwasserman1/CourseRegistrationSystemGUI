@@ -30,7 +30,6 @@ public class SYSGUI {
 		titleText.setBounds(600, 50, 300,30);
 		titleText.setFont(font1);
 		panel.add(titleText);
-		//panel.setVisible(true);
 		frame.add(panel);
 		frame.setSize(1920,1080);
 		frame.setLayout(null);
@@ -45,6 +44,22 @@ public class SYSGUI {
 		
 	}
 	public void adminUI() {
+		panel.setLayout(null);
+		frame.setLayout(null);
+		JButton BcreateCourse, BdeleteCourse, BeditCourse, BregisterStudent, BviewAllFull, BwriteFull, BsortCourses, BdisplayCourseInfo, Breturn;
+		BcreateCourse = new JButton("Create course");
+		BdeleteCourse = new JButton("Delete course");
+		BeditCourse = new JButton("Edit course");
+		BregisterStudent = new JButton("Register student");
+		BviewAllFull = new JButton("View full courses");
+		BwriteFull = new JButton("Write file of full courses");
+		BsortCourses = new JButton("Sort Courses");
+		BdisplayCourseInfo = new JButton("Display info for course");
+		Breturn = new JButton("Return to home");
+		
+		BcreateCourse.setBounds(600, 100, 300,50);
+		BdeleteCourse.setBounds(600, 150, 300,50);
+		BeditCourse.setBounds(600, 200, 300,50);
 		BregisterStudent.setBounds(600, 250, 300,50);
 		BviewAllFull.setBounds(600, 300, 300,50);
 		BwriteFull.setBounds(600, 350, 300,50);
