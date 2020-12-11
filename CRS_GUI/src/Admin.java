@@ -12,7 +12,7 @@ public class Admin extends User implements IAdmin{
 	}
 
 	@Override
-	public void deleteCourse() {//Deletes desired course
+	public void deleteCourse(String courseId, String sectionNumber) {//Deletes desired course
 		Scanner response = new Scanner(System.in);
 		String targetID,targetSectionNumber;
 		System.out.println("Delete a Course: \n Course ID");
@@ -61,12 +61,12 @@ public class Admin extends User implements IAdmin{
 		
 
 	@Override
-	public void displayCourseInfo() {//Displays desired course info
+	public void displayCourseInfo(String courseId, String sectionNumber) {//Displays desired course info
 		Scanner response = new Scanner(System.in);
 		System.out.println("View a Course: \n Course ID");
 		String courseID = response.nextLine();
 		System.out.println("Course Section Number");
-		String sectionNumber = response.nextLine();
+		//String sectionNumber = response.nextLine();
 		String resp;
 		Scanner sc = new Scanner(System.in);
 		boolean isFound = false;
@@ -95,7 +95,7 @@ public class Admin extends User implements IAdmin{
 	}
 
 	@Override
-	public void registerStudent() {//Registers a new student into the system
+	public void registerStudent(String username, String password, String fname, String lname) {//Registers a new student into the system
 		Scanner response = new Scanner(System.in);
 		System.out.println("Register a student into the System");
 		System.out.println("First Name");
@@ -113,6 +113,12 @@ public class Admin extends User implements IAdmin{
 	
 	
 	
+
+	@Override
+	public void Exit() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void viewAllFull() {//Allows admin to view all full courses

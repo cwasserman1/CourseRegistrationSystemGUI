@@ -13,14 +13,17 @@ public class SYSGUI {
 	ArrayList<JComponent> Adminbuttons, CreCourseScreen,delCourseScreen,editCourseScreen,regStScreen,viewFullScreen,writeFullScreen,sortScreen,displayInfoScreen;
 	JButton BcreateCourse, BdeleteCourse, BeditCourse, BregisterStudent, BviewAllFull, BwriteFull, BsortCourses, BdisplayCourseInfo, Breturn, enterCourse;
 	JTextField cName, cId, cInstr,cLoc,sSecNum,cCap;
+	String ADMIN_USER,ADMIN_PASS;
+	Admin mainAdmin;
 	public SYSGUI() {
 		initializeLayout();
 		homeScreen();
 		
+		
 	}
 	public void initializeLayout()
 	{
-		
+		mainAdmin = new Admin(ADMIN_USER,ADMIN_PASS,"admin","admin");
 		font1 = new Font("SansSerif", Font.BOLD, 20);
 		frame = new JFrame();
 		panel = new JPanel();
@@ -96,13 +99,26 @@ public class SYSGUI {
 		
 	}
 	public void adminUI() {
+	
 		
 		addComptoPanel(Adminbuttons);
 		
 		setComponentState(Adminbuttons, true);
-		BcreateCourse.addActionListener(new ActionListener() {
+		BcreateCourse.addActionListener(new ActionListener() { //Button to Create a course
+			
+			
 			
 			 public void actionPerformed(ActionEvent e) {
+					JButton back = new JButton("Back");
+					back.setBounds(600,450,150,50);
+					panel.add(back);
+					back.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							back.setVisible(false);
+							setComponentState(CreCourseScreen, false);
+							adminUI();
+						}
+					});
 				 int initialY = 100;
 				 
 				 for(JComponent i: CreCourseScreen) {
@@ -116,8 +132,12 @@ public class SYSGUI {
 				 
 				 setComponentState(CreCourseScreen, true);
 				 enterCourse.addActionListener(new ActionListener() {
-			 public void actionPerformed(ActionEvent e) {
-				  
+			 public void actionPerformed(ActionEvent e) { //Button to confirm add course
+				 
+				  mainAdmin.createCourse(cName.getText(), cId.getText(), cInstr.getText(), sSecNum.getText(), cLoc.getText(), Integer.parseInt(cCap.getText()));
+				  for(Course k: CourseData.allCourses) {
+					  System.out.println(k.getCourseName());
+				  }
 			 }
 		 });
 				 
@@ -196,8 +216,8 @@ for(JComponent i: compList) {
 				 loginButton.setVisible(true);
 				 adminUserName.setVisible(true);
 				 adminPassword.setVisible(true);
-				 String ADMIN_USER = "Admin";
-				 String ADMIN_PASS = "Admin001";
+				 ADMIN_USER = "Admin";
+				 ADMIN_PASS = "Admin001";
 				 loginButton.addActionListener(new ActionListener() {
 					 public void actionPerformed(ActionEvent e) {
 						 if(adminUserName.getText().strip().equals(ADMIN_USER)&&adminPassword.getText().strip().equals(ADMIN_PASS)) {
