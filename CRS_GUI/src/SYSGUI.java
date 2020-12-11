@@ -10,7 +10,9 @@ public class SYSGUI {
 	JButton adminB, studentB;
 	JPanel panel;
 	Font font1;
-	
+	ArrayList<JComponent> Adminbuttons, CreCourseScreen,delCourseScreen,editCourseScreen,regStScreen,viewFullScreen,writeFullScreen,sortScreen,displayInfoScreen;
+	JButton BcreateCourse, BdeleteCourse, BeditCourse, BregisterStudent, BviewAllFull, BwriteFull, BsortCourses, BdisplayCourseInfo, Breturn, enterCourse;
+	JTextField cName, cId, cInstr,cLoc,sSecNum,cCap;
 	public SYSGUI() {
 		initializeLayout();
 		homeScreen();
@@ -18,6 +20,7 @@ public class SYSGUI {
 	}
 	public void initializeLayout()
 	{
+		
 		font1 = new Font("SansSerif", Font.BOLD, 20);
 		frame = new JFrame();
 		panel = new JPanel();
@@ -29,8 +32,57 @@ public class SYSGUI {
 		titleText.setText("Course Registration System");
 		titleText.setBounds(600, 50, 300,30);
 		titleText.setFont(font1);
-		panel.add(titleText);
+		
+		
+		BcreateCourse = new JButton("Create course");
+		BdeleteCourse = new JButton("Delete course");
+		BeditCourse = new JButton("Edit course");
+		BregisterStudent = new JButton("Register student");
+		BviewAllFull = new JButton("View full courses");
+		BwriteFull = new JButton("Write file of full courses");
+		BsortCourses = new JButton("Sort Courses");
+		BdisplayCourseInfo = new JButton("Display info for course");
+		Breturn = new JButton("Return to home");
+		Adminbuttons = new ArrayList<JComponent>();
+		CreCourseScreen = new ArrayList<JComponent>();
+		
+		
+		
+		Adminbuttons.add(BcreateCourse);
+		Adminbuttons.add(BdeleteCourse);
+		Adminbuttons.add(BeditCourse);
+		Adminbuttons.add(BregisterStudent);
+		Adminbuttons.add(BviewAllFull);
+		Adminbuttons.add(BwriteFull);
+		Adminbuttons.add(BsortCourses);
+		Adminbuttons.add(BdisplayCourseInfo);
+		Adminbuttons.add(Breturn);
+		
+		cName = new JTextField("Course Name"); 
+		cId = new JTextField("Course ID");
+		cInstr = new JTextField("Course Instructor");
+		cLoc = new JTextField("Course Location");
+		sSecNum = new JTextField("Course Section Number");
+		cCap = new JTextField("Max Capacity");
+		enterCourse = new JButton("Confirm Add");
+		
+		CreCourseScreen.add(cName);
+		CreCourseScreen.add(cId);
+		CreCourseScreen.add(cInstr);
+		CreCourseScreen.add(cLoc);
+		CreCourseScreen.add(sSecNum);
+		CreCourseScreen.add(cCap);
+		CreCourseScreen.add(enterCourse);
+		
+		int initialY = 100;
+		for(JComponent i: Adminbuttons) {
+			i.setBounds(600,initialY,300,50);
+			i.setVisible(false);
+			initialY+=50;
+		}	
 		frame.add(panel);
+		panel.add(titleText);
+		
 		frame.setSize(1920,1080);
 		frame.setLayout(null);
 		frame.setVisible(true);
@@ -44,44 +96,90 @@ public class SYSGUI {
 		
 	}
 	public void adminUI() {
-		panel.setLayout(null);
-		frame.setLayout(null);
-		JButton BcreateCourse, BdeleteCourse, BeditCourse, BregisterStudent, BviewAllFull, BwriteFull, BsortCourses, BdisplayCourseInfo, Breturn;
-		BcreateCourse = new JButton("Create course");
-		BdeleteCourse = new JButton("Delete course");
-		BeditCourse = new JButton("Edit course");
-		BregisterStudent = new JButton("Register student");
-		BviewAllFull = new JButton("View full courses");
-		BwriteFull = new JButton("Write file of full courses");
-		BsortCourses = new JButton("Sort Courses");
-		BdisplayCourseInfo = new JButton("Display info for course");
-		Breturn = new JButton("Return to home");
 		
-		BcreateCourse.setBounds(600, 100, 300,50);
-		BdeleteCourse.setBounds(600, 150, 300,50);
-		BeditCourse.setBounds(600, 200, 300,50);
-		BregisterStudent.setBounds(600, 250, 300,50);
-		BviewAllFull.setBounds(600, 300, 300,50);
-		BwriteFull.setBounds(600, 350, 300,50);
-		BsortCourses.setBounds(600, 400, 300,50);
-		BdisplayCourseInfo.setBounds(600, 450, 300,50);
-		Breturn.setBounds(600, 500, 500,50);
+		addComptoPanel(Adminbuttons);
 		
-		
-		
-		panel.add(BcreateCourse); panel.add(BdeleteCourse); panel.add(BeditCourse); panel.add(BregisterStudent);panel.add(BviewAllFull);panel.add(BwriteFull);
-		panel.add(BsortCourses); panel.add(BdisplayCourseInfo); panel.add(Breturn);
-		
-		BcreateCourse.setVisible(true);
-		BdeleteCourse.setVisible(true);
-		BeditCourse.setVisible(true);
-		BregisterStudent.setVisible(true);
-		BviewAllFull.setVisible(true);
-		BwriteFull.setVisible(true);
-		BsortCourses.setVisible(true);
-		BdisplayCourseInfo.setVisible(true);
-		Breturn.setVisible(true);
-	
+		setComponentState(Adminbuttons, true);
+		BcreateCourse.addActionListener(new ActionListener() {
+			
+			 public void actionPerformed(ActionEvent e) {
+				 int initialY = 100;
+				 
+				 for(JComponent i: CreCourseScreen) {
+					 i.setBounds(600,initialY,300,50);
+					 initialY += 50;
+				 }
+				 
+				 setComponentState(Adminbuttons, false);
+				 
+				 addComptoPanel(CreCourseScreen);
+				 
+				 setComponentState(CreCourseScreen, true);
+				 enterCourse.addActionListener(new ActionListener() {
+			 public void actionPerformed(ActionEvent e) {
+				  
+			 }
+		 });
+				 
+				
+				 
+				 
+			 }
+		 });
+		BdeleteCourse.addActionListener(new ActionListener() {
+			 public void actionPerformed(ActionEvent e) {
+				 
+				 setComponentState(Adminbuttons, false);
+				 
+			 }
+		 });
+		BeditCourse.addActionListener(new ActionListener() {
+			 public void actionPerformed(ActionEvent e) {
+				 setComponentState(Adminbuttons, false);
+			 }
+		 });
+		BregisterStudent.addActionListener(new ActionListener() {
+			 public void actionPerformed(ActionEvent e) {
+				 setComponentState(Adminbuttons, false);
+			 }
+		 });
+		BviewAllFull.addActionListener(new ActionListener() {
+			 public void actionPerformed(ActionEvent e) {
+				 setComponentState(Adminbuttons, false);
+			 }
+		 });
+		BwriteFull.addActionListener(new ActionListener() {
+			 public void actionPerformed(ActionEvent e) {
+				 setComponentState(Adminbuttons, false);
+			 }
+		 });
+		BsortCourses.addActionListener(new ActionListener() {
+			 public void actionPerformed(ActionEvent e) {
+				 setComponentState(Adminbuttons, false);
+			 }
+		 });
+		BwriteFull.addActionListener(new ActionListener() {
+			 public void actionPerformed(ActionEvent e) {
+				 setComponentState(Adminbuttons, false);
+			 }
+		 });
+		Breturn.addActionListener(new ActionListener() {
+			 public void actionPerformed(ActionEvent e) {
+				 setComponentState(Adminbuttons, false);
+			 }
+		 });
+	}
+	public void setComponentState(ArrayList<JComponent> compList, boolean isActive) {
+for(JComponent i: compList) {
+			
+			i.setVisible(isActive);
+			
+		}
+	}
+	public void addComptoPanel(ArrayList<JComponent> comp) {
+		for(JComponent i: comp) {
+			panel.add(i);
+		}
 	}
 	public void adminLoginUI() {
 		
@@ -127,7 +225,7 @@ public class SYSGUI {
 			 public void actionPerformed(ActionEvent e) {
 				 adminB.setVisible(false);
 				 studentB.setVisible(false);
-				 adminLoginUI();	 
+				 adminUI(); //Should be AdminLoginUI() 
 			 }
 		 });
 		 
