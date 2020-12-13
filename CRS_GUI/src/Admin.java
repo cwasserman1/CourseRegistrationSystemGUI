@@ -91,17 +91,8 @@ public class Admin extends User implements IAdmin{
 
 	@Override
 	public void registerStudent(String username, String password, String fname, String lname) {//Registers a new student into the system
-		Scanner response = new Scanner(System.in);
-		System.out.println("Register a student into the System");
-		System.out.println("First Name");
-		String studentFName  = response.nextLine();
-		System.out.println("Last Name");
-		String studentLName  = response.nextLine();
-		System.out.println("User Name");
-		String studentUName  = response.nextLine();
-		System.out.println("Password");
-		String studentPWord  = response.nextLine();
-		CourseData.addStudent(studentUName,studentPWord,studentFName,studentLName);
+		
+		CourseData.addStudent(username,password,fname,lname);
 		
 	}
 
@@ -116,21 +107,19 @@ public class Admin extends User implements IAdmin{
 	}
 
 	@Override
-	public void viewAllFull() {//Allows admin to view all full courses
-		for(Course i: CourseData.getAllCourses()) {
-			if(i.checkFull()==true) {
-				System.out.println("Name: "+i.getCourseName()+"\nID:"+i.getCourseId()+"\n Instructor: "+i.getCourseInstructor()+ "\n  Section Number: "+i.getSectionNumber());
-				System.out.println("Location"+i.getLocation()+"\n Max Capacity: "+i.getMaxReg()+"Current number enrolled: "+ i.getCurrentReg());
-			}
+	public String viewAllFull() {//Allows admin to view all full courses
+		String list_of_full = "";
+		for(Course i: CourseData.allCourses) {
+			if(i.checkFull())
+				list_of_full +=i;
 		}
-		
+		return list_of_full;
 	}
 
 	@Override
-	public void writeFull() {// Makes a .txt file of full courses
-		Scanner response = new Scanner(System.in);
-		System.out.println("What would you like the file to be called?");
-		String fileName = response.nextLine();
+	public void writeFull(String fileName) {// Makes a .txt file of full courses
+		
+		
 		try {
 			FileWriter writer = new FileWriter(fileName);
 			for(Course i: CourseData.getAllCourses()) {
@@ -154,13 +143,8 @@ public class Admin extends User implements IAdmin{
 	allCoursesCopy.addAll(CourseData.getAllCourses());
 	Collections.sort(allCoursesCopy,(c1, c2) -> c1.getCurrentReg()-c2.getCurrentReg());
 	int count = 0;
-	for(Course i : allCoursesCopy)
-	{
-		count++;
-		System.out.println("Course"+count);
-		System.out.println(" Name: "+i.getCourseName()+"\n ID: "+i.getCourseId()+"\n Instructor: "+i.getCourseInstructor()+ "\n Section Number: "+i.getSectionNumber());
-		System.out.println(" Location: "+i.getLocation()+"\n Max Capacity: "+i.getMaxReg()+"\n Current capacity: "+ i.getCurrentReg());
-	}
+	String result = "";
+	
 
 }
 }

@@ -5,8 +5,8 @@ public interface IAdmin {
 	public void editCourse();
 	public void registerStudent(String username, String password, String fname, String lname);
 	public void Exit();
-	public void viewAllFull();
+	public String viewAllFull();
 	public void displayCourseInfo(String courseId, String sectionNumber);
-	public void writeFull();
+	public void writeFull(String fileName);
 	public void sortCourses();
 }

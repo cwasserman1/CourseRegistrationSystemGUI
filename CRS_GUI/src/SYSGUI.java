@@ -211,31 +211,103 @@ public class SYSGUI {
 				 JTextField userName, password,fName,lName;
 				 JButton register,back;
 				 userName = new JTextField("User Name");
-				 
 				 password = new JTextField("PassWord");
 				 fName = new JTextField("First Name");
 				 lName = new JTextField("Last Name");
 				 register = new JButton("Register"); 
 				 back = new JButton("Back");
 				 
-				 thisScreen.add(userName); thisScreen.add(back); thisScreen.add(register);
+				 thisScreen.add(userName);  
 				 thisScreen.add(password); thisScreen.add(fName); thisScreen.add(lName);
-				 
+				 thisScreen.add(register);
+				 thisScreen.add(back);
+				 setDefaultLayout(100,thisScreen);
+				 addComptoPanel(thisScreen);
 				 setComponentState(Adminbuttons, false);
+				 register.addActionListener(new ActionListener() {
+					 public void actionPerformed(ActionEvent e) {
+						 mainAdmin.registerStudent(userName.getText(), password.getText(), fName.getText(), lName.getText());
+					 }
+				 });
+				 back.addActionListener(new ActionListener() {
+					 public void actionPerformed(ActionEvent e) {
+						 
+						 setComponentState(thisScreen, false);
+						 back.setVisible(false);
+						 adminUI();						 
+					 }
+				 });
 			 }
 		 });
 		BviewAllFull.addActionListener(new ActionListener() {
 			 public void actionPerformed(ActionEvent e) {
+				 ArrayList<JComponent> thisScreen = new ArrayList<JComponent>();
+				 JLabel title = new JLabel("Full Courses");
+				 JLabel body = new JLabel();
+				 JButton back = new JButton("Back");
+				 
+				 thisScreen.add(title); thisScreen.add(body);thisScreen.add(back);
+				 addComptoPanel(thisScreen); 
+				 setDefaultLayout(100,thisScreen);
+				 body.setText(mainAdmin.viewAllFull());
+				 back.addActionListener(new ActionListener() {
+ 					 public void actionPerformed(ActionEvent e) {
+						 
+						 setComponentState(thisScreen, false);
+						 back.setVisible(false);
+						 adminUI();						 
+					 }
+				 });
 				 setComponentState(Adminbuttons, false);
 			 }
 		 });
 		BwriteFull.addActionListener(new ActionListener() {
 			 public void actionPerformed(ActionEvent e) {
+				 ArrayList<JComponent> thisScreen = new ArrayList<JComponent>();
+				 JLabel title = new JLabel("Write a file of the full courses");
+				 JTextField body = new JTextField("File Name");
+				 JButton back = new JButton("Back");
+				 JButton writeFile = new JButton("Write File");
+				 
+				 thisScreen.add(title); thisScreen.add(body);thisScreen.add(back); thisScreen.add(writeFile);
+				 addComptoPanel(thisScreen);
+				 
+				 setDefaultLayout(100,thisScreen);
+				 body.setText(mainAdmin.viewAllFull());
+				 writeFile.addActionListener(new ActionListener() {
+ 					 public void actionPerformed(ActionEvent e) {
+						 mainAdmin.writeFull(body.getText());				 
+					 }
+				 });
+				 back.addActionListener(new ActionListener() {
+ 					 public void actionPerformed(ActionEvent e) {
+						 
+						 setComponentState(thisScreen, false);
+						 back.setVisible(false);
+						 adminUI();						 
+					 }
+				 });
 				 setComponentState(Adminbuttons, false);
 			 }
 		 });
 		BsortCourses.addActionListener(new ActionListener() {
 			 public void actionPerformed(ActionEvent e) {
+				 
+				 mainAdmin.sortCourses();
+				 String[] columns = {"Course Name", "Course ID","Course Instructor", "Section Number","Location","Max Capacity"};
+				 String[][] currentCourses = new String[6][CourseData.allCourses.size()];
+				 for(int i = 0; i<currentCourses.length;i++) {
+					 currentCourses[0][i] = CourseData.allCourses.get(i).getCourseName();
+					 currentCourses[1][i] = CourseData.allCourses.get(i).getCourseId();
+					 currentCourses[2][i] = CourseData.allCourses.get(i).getCourseInstructor();
+					 currentCourses[3][i] = CourseData.allCourses.get(i).getSectionNumber();
+					 currentCourses[4][i] = CourseData.allCourses.get(i).getLocation();
+					 currentCourses[5][i] = String.valueOf(CourseData.allCourses.get(i).getMaxReg());
+					
+				 }
+				 JTable courseTable = new JTable(currentCourses,columns);
+				 courseTable.setBounds(30, 40, 200, 500);
+				 
 				 setComponentState(Adminbuttons, false);
 			 }
 		 });
@@ -254,6 +326,7 @@ public class SYSGUI {
 for(JComponent i: compList) {
 			
 			i.setVisible(isActive);
+			i.setEnabled(isActive);
 			
 		}
 	}
