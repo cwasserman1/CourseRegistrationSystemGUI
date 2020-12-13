@@ -155,7 +155,7 @@ public class SYSGUI {
 				 
 			 }
 		 });
-		BdeleteCourse.addActionListener(new ActionListener() {
+		BdeleteCourse.addActionListener(new ActionListener() { //Button to delete course
 			 public void actionPerformed(ActionEvent e) {
 				 setComponentState(Adminbuttons, false);
 				 ArrayList<JComponent> thisScreen = new ArrayList<JComponent>();
@@ -176,7 +176,10 @@ public class SYSGUI {
 				 confirmDel.addActionListener(new ActionListener() {
 					 public void actionPerformed(ActionEvent e) {
 						mainAdmin.deleteCourse(delID.getText(), delSec.getText());
-
+						System.out.println("Calling mainadmin.deletecourse");
+						for(Course i: CourseData.allCourses) {
+							System.out.println("Course1: "+ i.getCourseName()+" ");
+						}
 						 
 						 
 						
@@ -203,6 +206,21 @@ public class SYSGUI {
 		 });
 		BregisterStudent.addActionListener(new ActionListener() {// Button for admin to register student
 			 public void actionPerformed(ActionEvent e) {
+				 setComponentState(Adminbuttons, false);
+				 ArrayList<JComponent> thisScreen = new ArrayList<JComponent>();
+				 JTextField userName, password,fName,lName;
+				 JButton register,back;
+				 userName = new JTextField("User Name");
+				 
+				 password = new JTextField("PassWord");
+				 fName = new JTextField("First Name");
+				 lName = new JTextField("Last Name");
+				 register = new JButton("Register"); 
+				 back = new JButton("Back");
+				 
+				 thisScreen.add(userName); thisScreen.add(back); thisScreen.add(register);
+				 thisScreen.add(password); thisScreen.add(fName); thisScreen.add(lName);
+				 
 				 setComponentState(Adminbuttons, false);
 			 }
 		 });
@@ -275,8 +293,11 @@ for(JComponent i: compList) {
 	
 	public void homeScreen() {
 		adminB = new JButton("Admin Login");
+		
 		studentB = new JButton("Student Login");
+		
 		adminB.setFont(font1);
+		
 		studentB.setFont(font1);
 		
 		panel.add(adminB); panel.add(studentB);

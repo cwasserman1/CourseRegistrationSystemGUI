@@ -30,11 +30,19 @@ public class CourseData {
 		allCourses.add(a);
 	}
 	public static void removeCourse(String courseId, String sectionNumber) {
-//		for(Course i: CourseData.getAllCourses()) {
-//			if(i.getCourseId().equals(courseId)&&i.getSectionNumber().equals(sectionNumber)) {
-//				allCourses.remove(CourseData.getAllCourses().indexOf(i));
-//			}
-//		}
+		for(Course i: CourseData.getAllCourses()) {
+			System.out.println("Searching for"+courseId+ " to delete");
+			
+			if(i.getCourseId().equals(courseId)&&i.getSectionNumber().equals(sectionNumber)) {
+				
+				
+				allCourses.remove(CourseData.getAllCourses().indexOf(i));
+				break;
+				
+				
+				
+			}
+		}
 		
 	}
 	public static void setAllCourses(ArrayList<Course> allCourses) {
