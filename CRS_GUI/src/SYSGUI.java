@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -292,39 +294,95 @@ public class SYSGUI {
 		 });
 		BsortCourses.addActionListener(new ActionListener() {
 			 public void actionPerformed(ActionEvent e) {
-				 
+				 ArrayList<JComponent> thisScreen = new ArrayList<JComponent>();
+				 JButton back = new JButton("Back");
 				 mainAdmin.sortCourses();
 				 String[] columns = {"Course Name", "Course ID","Course Instructor", "Section Number","Location","Max Capacity"};
-				 String[][] currentCourses = new String[6][CourseData.allCourses.size()];
-				 for(int i = 0; i<currentCourses.length;i++) {
-					 currentCourses[0][i] = CourseData.allCourses.get(i).getCourseName();
-					 currentCourses[1][i] = CourseData.allCourses.get(i).getCourseId();
-					 currentCourses[2][i] = CourseData.allCourses.get(i).getCourseInstructor();
-					 currentCourses[3][i] = CourseData.allCourses.get(i).getSectionNumber();
-					 currentCourses[4][i] = CourseData.allCourses.get(i).getLocation();
-					 currentCourses[5][i] = String.valueOf(CourseData.allCourses.get(i).getMaxReg());
+				 String[][] currentCourses = new String[CourseData.allCourses.size()][6];
+				 for(int i = 0; i<CourseData.allCourses.size();i++) {
+					 currentCourses[i][0] = CourseData.allCourses.get(i).getCourseName();
+					 currentCourses[i][1] = CourseData.allCourses.get(i).getCourseId();
+					 currentCourses[i][2] = CourseData.allCourses.get(i).getCourseInstructor();
+					 currentCourses[i][3] = CourseData.allCourses.get(i).getSectionNumber();
+					 currentCourses[i][4] = CourseData.allCourses.get(i).getLocation();
+					 currentCourses[i][5] = String.valueOf(CourseData.allCourses.get(i).getMaxReg());
 					
 				 }
 				 JTable courseTable = new JTable(currentCourses,columns);
-				 courseTable.setBounds(30, 40, 200, 500);
+				 thisScreen.add(courseTable);thisScreen.add(back);
+				 courseTable.setBounds(400,100, 1000, 750);
+				 addComptoPanel(thisScreen);
+				 back.setBounds(100, 50, 150, 50);
+				 setComponentState(Adminbuttons, false);
+				 back.addActionListener(new ActionListener() {
+ 					 public void actionPerformed(ActionEvent e) {
+						 
+						 setComponentState(thisScreen, false);
+						 back.setVisible(false);
+						 adminUI();						 
+					 }
+				 });
+			 }
+			 
+			 
+		 });
+		BdisplayCourseInfo.addActionListener(new ActionListener() {
+			 public void actionPerformed(ActionEvent e) {
 				 
 				 setComponentState(Adminbuttons, false);
+				 ArrayList<JComponent> thisScreen = new ArrayList<JComponent>();
+				 JButton back = new JButton("Back");
+				 JButton enter = new JButton("Enter");
+				 JTextField courseID = new JTextField("Course ID");
+				 JTextField secNum = new JTextField("Section Number");
+				 
+				 
+				 
+				 DefaultTableModel model = new DefaultTableModel();
+				 model.addColumn("Course Name");
+				 model.addColumn("Course ID");
+				 model.addColumn("Course Instructor");
+				 model.addColumn("Section Number");
+				 model.addColumn("Location");
+				 model.addColumn("Max Capacity");
+				 JTable courseTable = new JTable(model);
+				 
+				 thisScreen.add(courseID); thisScreen.add(secNum);thisScreen.add(enter); thisScreen.add(back); thisScreen.add(courseTable);
+				 addComptoPanel(thisScreen);
+				 setDefaultLayout(100,thisScreen);
+				 courseTable.setBounds(400,400, 1000, 400);
+				 
+				 enter.addActionListener(new ActionListener() {
+			 public void actionPerformed(ActionEvent e) {
+				 
+				 
+				  model.addRow(mainAdmin.displayCourseInfo(courseID.getText(), secNum.getText()));
 			 }
 		 });
-		BwriteFull.addActionListener(new ActionListener() {
-			 public void actionPerformed(ActionEvent e) {
-				 setComponentState(Adminbuttons, false);
+				 back.addActionListener(new ActionListener() {
+ 					 public void actionPerformed(ActionEvent e) {
+						 
+						 setComponentState(thisScreen, false);
+						 back.setVisible(false);
+						 courseTable.setVisible(false);
+						 courseTable.setEnabled(false);
+						 adminUI();						 
+					 }
+				 });
 			 }
+			 
 		 });
 		Breturn.addActionListener(new ActionListener() {
 			 public void actionPerformed(ActionEvent e) {
+				 // ,   JTextField course
 				 setComponentState(Adminbuttons, false);
+				 homeScreen();
 			 }
 		 });
 	}
 	public void setComponentState(ArrayList<JComponent> compList, boolean isActive) {
 for(JComponent i: compList) {
-			
+			i.setOpaque(true);
 			i.setVisible(isActive);
 			i.setEnabled(isActive);
 			

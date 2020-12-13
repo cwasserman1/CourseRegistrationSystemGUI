@@ -6,7 +6,7 @@ public interface IAdmin {
 	public void registerStudent(String username, String password, String fname, String lname);
 	public void Exit();
 	public String viewAllFull();
-	public void displayCourseInfo(String courseId, String sectionNumber);
+	public String[] displayCourseInfo(String courseId, String sectionNumber);
 	public void writeFull(String fileName);
 	public void sortCourses();
 }

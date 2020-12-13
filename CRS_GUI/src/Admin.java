@@ -56,36 +56,21 @@ public class Admin extends User implements IAdmin{
 		
 
 	@Override
-	public void displayCourseInfo(String courseId, String sectionNumber) {//Displays desired course info
-		Scanner response = new Scanner(System.in);
-		System.out.println("View a Course: \n Course ID");
-		String courseID = response.nextLine();
-		System.out.println("Course Section Number");
-		//String sectionNumber = response.nextLine();
-		String resp;
-		Scanner sc = new Scanner(System.in);
-		boolean isFound = false;
+	public String[] displayCourseInfo(String courseId, String sectionNumber) {//Displays desired course info
+		String[] targetCourse = new String[6];
 		for(Course i: CourseData.getAllCourses()) {
-			if(i.getCourseId().equals(courseID)&&i.getSectionNumber().equals(sectionNumber)) {
-				System.out.println("1. List of students enrolled in class");
+			if(i.getCourseId().equals(courseId)&&i.getSectionNumber().equals(sectionNumber)) {
+				targetCourse[0] = CourseData.allCourses.get(0).getCourseName();
+				targetCourse[1] = CourseData.allCourses.get(0).getCourseId();
+				 targetCourse[2] = CourseData.allCourses.get(0).getCourseInstructor();
+				 targetCourse[3] = CourseData.allCourses.get(0).getSectionNumber();
+				 targetCourse[4] = CourseData.allCourses.get(0).getLocation();
+				 targetCourse[5] = String.valueOf(CourseData.allCourses.get(0).getMaxReg());
 				
-				System.out.println("2. General Class info");
 				
-				resp = sc.nextLine();
-				switch(Integer.parseInt(resp)) {
-				case 1:
-					for(Student k: i.getListOfReg()) {
-						System.out.print(k.getFname()+" "+k.getLname()+",");
-					}
-					System.out.println("");
-					break;
-				case 2:
-					System.out.println("Name: "+i.getCourseName()+"\nID:"+i.getCourseId()+"\n Instructor: "+i.getCourseInstructor()+ "\n  Section Number: "+i.getSectionNumber());
-					System.out.println("Location"+i.getLocation()+"\n Max Capacity: "+i.getMaxReg()+"Current number enrolled: "+ i.getCurrentReg());
-					break;
 				}
 			}
-		}
+		return targetCourse;
 		
 	}
 

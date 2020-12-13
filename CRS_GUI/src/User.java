@@ -27,9 +27,6 @@ public class User implements Serializable {
 	public String getLname() {
 		return lname;
 	}
-	public void displayCourseInfo(String courseId, String sectionNumber) {
-		System.out.println("Hello");
-	}
-	
+
 	
 }

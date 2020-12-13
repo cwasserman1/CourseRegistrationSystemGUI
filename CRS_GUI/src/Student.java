@@ -16,17 +16,25 @@ public class Student extends User implements IStudent, Serializable{
 	
 
 	@Override
-	public void viewOpenCourses() {
+	public ArrayList<String[]> viewOpenCourses() {
+		ArrayList<String[]> openCourses = new ArrayList<String[]>();
 		int count = 0;
 		for(Course i : CourseData.getAllCourses())
 		{
+			
 			if(i.checkFull()==false) {
-			count++;
-			System.out.println("Course"+count);
-			System.out.println(" Name: "+i.getCourseName()+"\n ID: "+i.getCourseId()+"\n Instructor: "+i.getCourseInstructor()+ "\n Section Number: "+i.getSectionNumber());
-			System.out.println(" Location: "+i.getLocation()+"\n Max Capacity: "+i.getMaxReg());}
+				String[] tempCourse = new String[6];
+				 tempCourse[0] = i.getCourseName();
+				 tempCourse[1] = i.getCourseId();
+				 tempCourse[2] = i.getCourseInstructor();
+				 tempCourse[3] = i.getSectionNumber();
+				 tempCourse[4] = i.getLocation();
+				 tempCourse[5] = String.valueOf(i.getMaxReg());
+				 openCourses.add(tempCourse);
+			
+			}
 		}
-		
+		return openCourses;
 	}
 	
 	@Override
