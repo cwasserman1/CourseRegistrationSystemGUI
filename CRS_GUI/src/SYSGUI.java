@@ -103,6 +103,9 @@ public class SYSGUI {
 	}
 	public void setDefaultLayout(int start,ArrayList<JComponent> compList) {
 		int initialY = start;
+		frame.setLayout(null);
+		panel.setLayout(null);
+		panel.resetKeyboardActions();
 		for(JComponent i: compList) {
 			 i.setBounds(600,initialY,300,50);
 			 initialY += 50;
@@ -190,10 +193,12 @@ public class SYSGUI {
 				 back.addActionListener(new ActionListener() {
 					 public void actionPerformed(ActionEvent e) {
 						 
+						 //System.out.println("BACK BUTTON CALLED");
 						 setComponentState(thisScreen, false);
-						 confirmDel.setVisible(false);
-						 back.setVisible(false);
-						 adminUI();						 
+						 System.out.println("BACK");
+						 
+						 
+						
 					 }
 				 });
 				 
@@ -385,6 +390,7 @@ for(JComponent i: compList) {
 			i.setOpaque(true);
 			i.setVisible(isActive);
 			i.setEnabled(isActive);
+			
 			
 		}
 	}
